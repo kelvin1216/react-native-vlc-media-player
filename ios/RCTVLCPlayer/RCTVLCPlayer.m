@@ -167,6 +167,8 @@ static NSString *const playbackRate = @"rate";
      NSLog(@"userInfo %@",[aNotification userInfo]);
      NSLog(@"standardUserDefaults %@",defaults);
     if(_player){
+        BOOL isPlaying = _player.isPlaying;
+        BOOL hasVideoOut = _player.hasVideoOut;
         VLCMediaPlayerState state = _player.state;
         CGSize videoSize =  _player.videoSize;
         int height = videoSize.height;
