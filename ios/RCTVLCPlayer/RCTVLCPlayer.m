@@ -176,7 +176,7 @@ static NSString *const playbackRate = @"rate";
         BOOL willPlay = _player.willPlay;
         switch (state) {
             case VLCMediaPlayerStateOpening:
-                self.onVideoStateChange(@{
+                self.onVideoOpen(@{
                                           @"target": self.reactTag,
                                           @"isPlaying": [NSNumber numberWithBool: isPlaying],
                                           @"hasVideoOut": [NSNumber numberWithBool: hasVideoOut],
@@ -188,7 +188,7 @@ static NSString *const playbackRate = @"rate";
                 break;
             case VLCMediaPlayerStatePaused:
                 _paused = YES;
-                self.onVideoStateChange(@{
+                self.onVideoOpen(@{
                                           @"target": self.reactTag,
                                           @"isPlaying": [NSNumber numberWithBool: isPlaying],
                                           @"hasVideoOut": [NSNumber numberWithBool: hasVideoOut],
@@ -199,7 +199,7 @@ static NSString *const playbackRate = @"rate";
                                           });
                 break;
             case VLCMediaPlayerStateStopped:
-                self.onVideoStateChange(@{
+                self.onVideoOpen(@{
                                           @"target": self.reactTag,
                                           @"isPlaying": [NSNumber numberWithBool: isPlaying],
                                           @"hasVideoOut": [NSNumber numberWithBool: hasVideoOut],
@@ -210,7 +210,7 @@ static NSString *const playbackRate = @"rate";
                                           });
                 break;
             case VLCMediaPlayerStateBuffering:
-                self.onVideoStateChange(@{
+                self.onVideoOpen(@{
                                           @"target": self.reactTag,
                                           @"isPlaying": [NSNumber numberWithBool: isPlaying],
                                           @"duration":[NSNumber numberWithInt:[_player.media.length intValue]],
@@ -223,7 +223,7 @@ static NSString *const playbackRate = @"rate";
                 break;
             case VLCMediaPlayerStatePlaying:
                 _paused = NO;
-                self.onVideoStateChange(@{
+                self.onVideoOpen(@{
                                           @"target": self.reactTag,
                                           @"isPlaying": [NSNumber numberWithBool: isPlaying],
                                           @"duration":[NSNumber numberWithInt:[_player.media.length intValue]],
@@ -236,7 +236,7 @@ static NSString *const playbackRate = @"rate";
                                           });
                 break;
             case VLCMediaPlayerStateESAdded:
-                self.onVideoStateChange(@{
+                self.onVideoOpen(@{
                                           @"target": self.reactTag,
                                           @"duration":[NSNumber numberWithInt:[_player.media.length intValue]],
                                           @"isPlaying": [NSNumber numberWithBool: isPlaying],
@@ -252,7 +252,7 @@ static NSString *const playbackRate = @"rate";
                 int currentTime   = [[_player time] intValue];
                 int remainingTime = [[_player remainingTime] intValue];
                 int duration      = [_player.media.length intValue];
-                self.onVideoStateChange(@{
+                self.onVideoOpen(@{
                                           @"target": self.reactTag,
                                           @"type": @"Ended",
                                           @"currentTime": [NSNumber numberWithInt:currentTime],
@@ -267,7 +267,7 @@ static NSString *const playbackRate = @"rate";
                                           });
                 break;
             case VLCMediaPlayerStateError:
-                self.onVideoStateChange(@{
+                self.onVideoOpen(@{
                                           @"target": self.reactTag,
                                           @"duration":[NSNumber numberWithInt:[_player.media.length intValue]],
                                           @"isPlaying": [NSNumber numberWithBool: isPlaying],
@@ -280,7 +280,7 @@ static NSString *const playbackRate = @"rate";
                 [self _release];
                 break;
             default:
-                self.onVideoStateChange(@{
+                self.onVideoOpen(@{
                                           @"target": self.reactTag,
                                           @"duration":[NSNumber numberWithInt:[_player.media.length intValue]],
                                           @"isPlaying": [NSNumber numberWithBool: isPlaying],
